@@ -1,3 +1,7 @@
 <h1> <%= @article.title %> </h1>
-<p><%= @article.body %></p>
+<p><%= @article.body %></p> 
+<p><%= link_to 'Delete', article_path(@article), method: :delete,
+data: {confirm: 'Are you sure you want to delete this post?'} %> |
+<%= link_to 'Edit', edit_article_path(@article) %></p>
+
 <%= link_to 'Back to Articles index list', articles_path %>
