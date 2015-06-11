@@ -5,6 +5,9 @@ class ArticlesController < ApplicationController
   
   def show
     @article = Article.find(params[:id])
+    # sending a blank comment object to the articles show view
+    @comment = Comment.new
+    @comment.article_id = @article.id
   end
   
   def new
