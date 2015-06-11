@@ -2,8 +2,10 @@ class Article < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :taggings
   has_many :tags, through: :taggings
+  mount_uploader :picture, PictureUploader
   validates :title, presence: true, length: { minimum: 4 }
   validates :body, presence: true
+  validate :picture_size
   
   def to_param 
     "#{id}-#{title.parameterize}-#{created_at.strftime("%B-%Y")}"
@@ -25,4 +27,13 @@ class Article < ActiveRecord::Base
     new_or_found_tags = tag_names.collect { |name| Tag.find_or_create_by(name: name) }
     self.tags = new_or_found_tags
   end
+  
+  private
+  
+    # validate picture size
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "Should be less than 5MB")
+      end
+    end
 end

@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
     @article.update_attributes(article_params)
     
     flash.notice = "#{@article.title} has been updated"
-    redirect_to articles_path(@article)
+    redirect_to @article
     
   end
   
@@ -47,6 +47,6 @@ class ArticlesController < ApplicationController
   private
   
     def article_params
-      params.require(:article).permit(:title, :body, :tag_list)
+      params.require(:article).permit(:title, :body, :tag_list, :picture)
     end
 end
