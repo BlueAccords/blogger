@@ -16,6 +16,10 @@
   </p>
     
   <p>
+    <% if @article.picture.exists? %>
+      <%= image_tag @article.picture.url %><br/> 
+    <% end %>
+    <%= f.label :picture, 'Attach a new Image' %><br/>
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif, image/png' %>
   </p>
 
