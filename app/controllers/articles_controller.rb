@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_filter :require_login, except: [:show, :index]
   def index
     @articles = Article.all.order('created_at DESC')
   end
